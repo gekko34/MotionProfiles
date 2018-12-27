@@ -1,11 +1,11 @@
 ## File: run.m
 ## Author: gekko34
-## Created: 2018-27-12
+## Platform: Octave, https://www.gnu.org/software/octave/ 
+## Created: 2018-12-27
 ## Version: alpha
 ## Function: script plots different types of motion profiles
 ## Input: DELTA_S, DELTA_T
-## Usage: run
-## Output: Different charts
+## Output: charts
 ## Dependencies: plot_profile.m, profile.m
 
 clear all

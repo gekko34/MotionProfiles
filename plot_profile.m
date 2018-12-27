@@ -1,11 +1,11 @@
 ## File: plot_profile.m
+## Platform: Octave, https://www.gnu.org/software/octave/ 
 ## Author: gekko34
-## Created: 2018-27-12
+## Created: 2018-12-27
 ## Version: alpha
 ## Function: plots a motion profile
 ## Input: time, position, speed, acceleration, jerk
-## Usage: plot_profile(time, position, speed, acceleration, jerk)
-## Output: Chart, no return
+## Output: chart, no return
 ## Dependencies: -
 
 function plot_profile(time, position, speed, acceleration, jerk)  

@@ -1,10 +1,10 @@
 ## File: profile.m
+## Platform: Octave, https://www.gnu.org/software/octave/ 
 ## Author: gekko34
-## Created: 2018-27-12
+## Created: 2018-12-27
 ## Version: alpha
 ## Function: generates a motion profile
 ## Input: type, deltaS, deltaT, s = 0, v = 0
-## Usage: [time, position, speed, acceleration] = profile(type, deltaS, deltaT, s = 0, v = 0)
 ## Output: time, position, speed, acceleration
 ## Dependencies: -
 
