@@ -1,8 +1,18 @@
+## File: run.m
+## Author: gekko34
+## Created: 2018-27-12
+## Version: alpha
+## Function: script plots different types of motion profiles
+## Input: DELTA_S, DELTA_T
+## Usage: run
+## Output: Different charts
+## Dependencies: plot_profile.m, profile.m
+
 clear all
 close all
 
-DELTA_S = 1000;
-DELTA_T = 1000;
+DELTA_S = 1000; % distance in increment 
+DELTA_T = 1000; % time in ms
 
 acc_vect = [];
 jerk_vect = [];
@@ -28,36 +38,14 @@ for i = 1:length(profiles)
 end
 
 figure()
-hold on
-grid on
-for i = 1:length(profiles)
-  h = bar(i, acc_vect(i), 'barwidth', 0.4);
-  if(i == 2)
-    set(h, 'facecolor', 'r')
-  else
-    set(h, 'facecolor', 'b')
-  end
-end  
-ylim([0,0.002]) 
+bar(acc_vect);
 title('Max. Acceleration [inc/ms^2]')
-set(gca,'xTickLabel', {0, profiles })
-
-
+set(gca,'xTickLabel', profiles)
+grid on
 
 
 figure()
-hold on
-grid on
-for i = 1:length(profiles)
-  h = bar(i, jerk_vect(i), 'barwidth', 0.4);
-  if(i == 2)
-    set(h, 'facecolor', 'r')
-  else
-    set(h, 'facecolor', 'b')
-  end
-end  
-
-ylim([0,0.00001])
+bar(jerk_vect);
 title('Max. Jerk [inc/ms^3]')
-set(gca,'xTickLabel', {0, profiles})
-
+set(gca,'xTickLabel', profiles)
+grid on
