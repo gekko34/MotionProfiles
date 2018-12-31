@@ -1,14 +1,12 @@
 ## File: plot_profile.m
-## Platform: Octave, https://www.gnu.org/software/octave/ 
-## Author: gekko34
+## Platform: Octave, https://www.gnu.org/software/octave/
+## Copyright (c): Remo Kälin, rkaelin@gmx.net
+## Author: Remo Kälin
 ## Created: 2018-12-27
 ## Version: alpha
-## Function: plots a motion profile
-## Input: time, position, speed, acceleration, jerk
-## Output: chart, no return
-## Dependencies: -
 
 function plot_profile(time, position, speed, acceleration, jerk)  
+   
    figure()
    subplot(4,1,1)
    plot(time,position)
@@ -22,7 +20,7 @@ function plot_profile(time, position, speed, acceleration, jerk)
    
    subplot(4,1,3)
    plot(time,acceleration)
-   ylabel('acceleration [inc/ms^2]')
+   ylabel('acc. [inc/ms^2]')
    grid on
    
    subplot(4,1,4)
@@ -30,4 +28,5 @@ function plot_profile(time, position, speed, acceleration, jerk)
    ylabel('jerk [inc/ms^3]')
    xlabel('time [ms]')
    grid on
+   
 end

@@ -5,14 +5,10 @@
 ## Created: 2018-12-27
 ## Version: alpha
 
-## Function: generates a motion profile
-## Input: profile type, deltaS(distance), deltaT(time), s0, v0
-## Input Conditions: type = 1..6, deltaT > 0  
-## Output: time, position, speed, acceleration
-## Dependencies: -
+function [time_2, position, speed, acceleration_2] = profile(type, deltaS, deltaT, s = 0, v = 0) 
 
-function [time, position, speed, acceleration] = profile(type, deltaS, deltaT, s = 0, v = 0) 
-
+  deltaT = deltaT *4;
+  
   time = 1:deltaT; 
   
   assert( deltaT > 0, 'deltaT is negative or "0"');
@@ -62,14 +58,22 @@ function [time, position, speed, acceleration] = profile(type, deltaS, deltaT, s
       
       acceleration = acceleration *deltaS *2 /(deltaT^2) *2 /9512 *9012;    
   end
+   
+  acceleration_2 = [];
+  time_2 = [];
   
-  speed = ones(deltaT,1)' *v +acceleration(1);
-  for i = 2:deltaT
-    speed(i) = speed(i-1) + acceleration(i);
+  for i = 1:length(acceleration)/4
+    acceleration_2(i) = acceleration(i*4);
+    time_2(i) = i;  
+  end
+  
+  speed = ones(deltaT /4,1)' *v +acceleration_2(1);
+  for i = 2:deltaT /4
+    speed(i) = speed(i-1) + acceleration_2(i);
   end
     
-  position = ones(deltaT,1)' *s +speed(1);
-  for i = 2:deltaT
+  position = ones(deltaT /4,1)' *s +speed(1);
+  for i = 2:deltaT /4
     position(i) = position(i-1) +speed(i);
   end 
 

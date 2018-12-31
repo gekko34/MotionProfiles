@@ -1,12 +1,9 @@
 ## File: main.m
-## Author: gekko34
-## Platform: Octave, https://www.gnu.org/software/octave/ 
-## Created: 2018-12-29
+## Platform: Octave, https://www.gnu.org/software/octave/
+## Copyright (c): Remo Kälin, rkaelin@gmx.net
+## Author: Remo Kälin
+## Created: 2018-12-27
 ## Version: alpha
-## Function: generates combined motion profiles
-## Input: profile type, distance [inc], acceleration [inc/ms^2], max. speed [inc/ms], start position [inc]
-## Output: motion charts & output file .mat
-## Dependencies: plot_profile.m, move_profile.m
 
 % clean up 
 clear;

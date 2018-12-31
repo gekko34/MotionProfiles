@@ -1,15 +1,15 @@
 ## File: run.m
-## Author: gekko34
-## Platform: Octave, https://www.gnu.org/software/octave/ 
+## Platform: Octave, https://www.gnu.org/software/octave/
+## Copyright (c): Remo Kälin, rkaelin@gmx.net
+## Author: Remo Kälin
 ## Created: 2018-12-27
 ## Version: alpha
-## Function: script plots different types of motion profiles
-## Input: DELTA_S, DELTA_T
-## Output: charts
-## Dependencies: plot_profile.m, profile.m
 
-clear all
-close all
+% clean up 
+clear;
+close all;
+clf;
+clc;
 
 DELTA_S = 1000; % distance in increment 
 DELTA_T = 1000; % time in ms
@@ -36,15 +36,15 @@ for i = 1:length(prof)
 
 end
 
-figure()
-bar(acc_vect);
-title('Max. Acceleration [inc/ms^2]')
-set(gca,'xTickLabel', prof)
-grid on
-
-
-figure()
-bar(jerk_vect);
-title('Max. Jerk [inc/ms^3]')
-set(gca,'xTickLabel', prof)
-grid on
+%figure()
+%bar(acc_vect);
+%title('Max. Acceleration [inc/ms^2]')
+%set(gca,'xTickLabel', prof)
+%grid on
+%
+%
+%figure()
+%bar(jerk_vect);
+%title('Max. Jerk [inc/ms^3]')
+%set(gca,'xTickLabel', prof)
+%grid on
