@@ -50,7 +50,7 @@ velocity = abs(velocity);
     time_2 = ( abs(distance) - 2* distance_1 ) /velocity;   
     distance_2 = velocity / time_2;
  
-    if(distance >0)
+    if(distance > 0)
       [x1, x2, x3, x4] = profile(profile_type, distance_1, time_1, 0, 0);  
       [y1, y2, y3, y4] = profile(profile_type, distance_2, time_2, x2(end), x3(end));
       [z1, z2, z3, z4] = profile(profile_type, -distance_1, time_1, y2(end), y3(end));
