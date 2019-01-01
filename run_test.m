@@ -7,7 +7,7 @@
 
 number_of_errors = 0;
 
-for i = 1:10
+for i = 1:100
   delta_s = randi([1,5000]); % distance in increment
 %  delta_s = 50; % distance in increment
   
@@ -15,6 +15,7 @@ for i = 1:10
 %  delta_t = 50; % time in ms 
 
 %  prof = randi([1,5]);
+%  prof = randi([1,2]);
   prof = 1;
 
   try

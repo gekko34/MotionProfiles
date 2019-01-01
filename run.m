@@ -20,6 +20,7 @@ jerk_vect = [];
 prof = { 'Const. Acc', 'Sine Acc.', 'Sine^s Acc.', 'S-Curve', 'Opt. S-Curve.', 'Torque Opt.' };
 
 for i = 1:length(prof)
+%for i = 1:2
  
   [x1, x2, x3, x4] = profile(i, DELTA_S, DELTA_T, 0, 0);
   [y1, y2, y3, y4] = profile(i, 0, DELTA_T, x2(end), x3(end) );
