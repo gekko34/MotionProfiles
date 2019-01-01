@@ -5,9 +5,7 @@
 ## Created: 2018-12-27
 ## Version: alpha
 
-function [time_2, position, speed, acceleration_2] = profile(type, deltaS, deltaT, s = 0, v = 0) 
-
-  deltaT = deltaT *4;
+function [time, position, speed, acceleration] = profile(type, deltaS, deltaT, s = 0, v = 0) 
   
   time = 1:deltaT; 
   
@@ -20,9 +18,16 @@ function [time_2, position, speed, acceleration_2] = profile(type, deltaS, delta
     case 1
 %     Const. Acc 
       acceleration = ones(deltaT,1)' *deltaS *2 /(deltaT^2);
+      
+%% v = a *t +v0     
+%      speed = acceleration .*time .+v;
+%% s = a /2 *t^2 + v0 *t +s0   
+%      position = acceleration ./2 .*time.^2 .+(v *time) +s;   
+%      return
+
     case 2
 %     Sine Acc.       
-      acceleration = sin(pi /deltaT *time) *1.5708 *deltaS *2 /(deltaT^2) ;
+      acceleration = sin(pi /deltaT *time) *1.5708 *deltaS *2 /(deltaT^2);  
     case 3
 %     Sine^s Acc. 
       acceleration = (-cos(pi /deltaT *time *2) + 1) *deltaS *2 /(deltaT^2);
@@ -56,25 +61,27 @@ function [time_2, position, speed, acceleration_2] = profile(type, deltaS, delta
         end  
       end
       
-      acceleration = acceleration *deltaS *2 /(deltaT^2) *2 /9512 *9012;    
-  end
-   
-  acceleration_2 = [];
-  time_2 = [];
-  
-  for i = 1:length(acceleration)/4
-    acceleration_2(i) = acceleration(i*4);
-    time_2(i) = i;  
+      acceleration = acceleration *deltaS *2 /(deltaT^2) *2 /3520* 4000;    
   end
   
-  speed = ones(deltaT /4,1)' *v +acceleration_2(1);
-  for i = 2:deltaT /4
-    speed(i) = speed(i-1) + acceleration_2(i);
+% v = int(a *t) +v0      
+  speed = zeros(deltaT,1)';
+  speed(1) = acceleration(1);
+  for i = 2:deltaT
+    speed(i) = speed(i-1) +acceleration(i);
   end
-    
-  position = ones(deltaT /4,1)' *s +speed(1);
-  for i = 2:deltaT /4
-    position(i) = position(i-1) +speed(i);
-  end 
+  speed = speed .+v;
 
+% s = int(v0 *t) +s0   
+  position = zeros(deltaT,1)';
+%  position(1) = speed(1) /2;
+  position(1) = speed(1);
+  for i = 2:deltaT
+%    position(i) = position(i-1) + speed(i-1) +(speed(i) -speed(i-1))/2;
+    position(i) = position(i-1) + speed(i);
+  end 
+  position = position .+s;
+
+  
+  
 end
