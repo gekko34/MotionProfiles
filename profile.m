@@ -7,37 +7,48 @@
 
 function [time, position, speed, acceleration] = profile(type, deltaS, deltaT, s = 0, v = 0) 
   
-  
-  time = 1:deltaT; 
-  
   assert( deltaT > 0, 'deltaT is negative or "0"'); 
   assert( 0 < type, 'profile type unknown');
   assert( type <= 6, 'profile type unknown');    
   
+  time = 1:deltaT;  
+  a = deltaS *2 /deltaT^2;
+  
+  time = 1:deltaT;
+  
   switch(type)
     case 1
 %     Const. Acc 
-      acceleration = ones(deltaT,1)'; 
-      acceleration = acceleration *deltaS *2 /(deltaT^2);     
-      speed = acceleration .*time .+v;  % v = a *t +v0 
-      position = acceleration ./2 .*time.^2 .+(v *time) +s;  % s = a /2 *t^2 + v0 *t +s0 
+      acceleration = a *ones(deltaT,1)';      
+      speed =        a *time .+v;  % v = a *t +v0
+      position =     a *time.^2 ./2 .+(v *time) .+s ;  % s = a /2 *t^2 + v0 *t +s0
       return
 
-%     Int(0,n,x) =  n *x 
-%     Int(0,n,nx) = n *x^2 /2     
+%     a = a
+%     v = Int(a) = a *x +C
+%     s = Int(v) = a *x^2 /2 +cx +C   
            
     case 2
 %     Sine Acc.       
-      acceleration = sin(pi /deltaT *time) *(pi /2);
-      acceleration = acceleration *deltaS *2 /(deltaT^2);         
-      speed = (-cos(pi /deltaT *time) +1) *deltaS /deltaT  .+v;  
-      position = (-sin(pi /deltaT *time)/pi + time /deltaT) *deltaS .+(v *time) +s;
+      acceleration = a *sin(pi /deltaT *time) *(pi /2);     
+      speed =        a *(-cos(pi /deltaT *time) *deltaT /2 + deltaT /2)     .+v; 
+      position =     a *(-sin(pi /deltaT *time) *deltaT^2 /2 /pi + time *deltaT /2)  .+(v *time) +s;
       return   
-          
-          
+
+%     a = a *sin(x) *(pi /2)
+%     v = Int(a) = -pi *a *cos(x) /2 +C
+%     s = Int(v) = -pi *a *sin(x) /2 +cx +C 
+       
     case 3
 %     Sine^s Acc. 
-      acceleration = (-cos(pi /deltaT *time *2) + 1);
+      acceleration =  -cos(pi /deltaT *time *2) + 1;  
+      % ..to be continued and converted into formulas
+
+%     a = a *-cos(2x) +1
+%     v = Int(a) = x -cos(x) *sin(x)+ C
+%     s = Int(v) = cos(x)^2 +x(x +2c) /2 +C 
+
+ 
     case 4
 %     S-Curve 
       acceleration_1 = 1 /deltaT *time *4;
@@ -72,6 +83,12 @@ function [time, position, speed, acceleration] = profile(type, deltaS, deltaT, s
   end
      
   acceleration = acceleration *deltaS *2 /(deltaT^2);
+ 
+ 
+ 
+ 
+ 
+% numerical integration 
  
 % v = int(a *t) +v0   
   speed = zeros(deltaT,1)';
